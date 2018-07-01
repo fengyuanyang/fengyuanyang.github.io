@@ -39,6 +39,6 @@ MARKUP = ('md', 'ipynb')
 PLUGIN_PATH = './plugins'
 PLUGINS = ['ipynb.markup']
 
-THEME = './pelican-themes/nest'
+THEME = './pelican-themes/pelican-blue'
 
 DISQUS_SITENAME = "fengyuanyang"
