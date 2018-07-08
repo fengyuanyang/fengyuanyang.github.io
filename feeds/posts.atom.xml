@@ -975,7 +975,7 @@ h6:hover .anchor-link {
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h1 id="What's-docker"&gt;What's &lt;a href="https://www.docker.com/"&gt;docker&lt;/a&gt;&lt;a class="anchor-link" href="#What's-docker"&gt;¶&lt;/a&gt;&lt;/h1&gt;&lt;blockquote&gt;&lt;ul&gt;
+&lt;h2 id="What's-docker"&gt;What's &lt;a href="https://www.docker.com/"&gt;docker&lt;/a&gt;&lt;a class="anchor-link" href="#What's-docker"&gt;¶&lt;/a&gt;&lt;/h2&gt;&lt;blockquote&gt;&lt;ul&gt;
 &lt;li&gt;Lightwgiht and secure platform &lt;/li&gt;
 &lt;li&gt;Simply build and run apps&lt;/li&gt;
 &lt;li&gt;Run on Windows and Mac&lt;/li&gt;
@@ -990,7 +990,7 @@ h6:hover .anchor-link {
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;hr/&gt;
-&lt;h1 id="Images-and-Containers"&gt;Images and Containers&lt;a class="anchor-link" href="#Images-and-Containers"&gt;¶&lt;/a&gt;&lt;/h1&gt;
+&lt;h2 id="Images-and-Containers"&gt;Images and Containers&lt;a class="anchor-link" href="#Images-and-Containers"&gt;¶&lt;/a&gt;&lt;/h2&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -998,7 +998,7 @@ h6:hover .anchor-link {
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h2 id="What's-Docker-Image"&gt;What's Docker Image&lt;a class="anchor-link" href="#What's-Docker-Image"&gt;¶&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;Read only template composed of layered file system&lt;/strong&gt;&lt;/p&gt;
+&lt;h3 id="What's-Docker-Image"&gt;What's Docker Image&lt;a class="anchor-link" href="#What's-Docker-Image"&gt;¶&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;Read only template composed of layered file system&lt;/strong&gt;&lt;/p&gt;
 &lt;blockquote&gt;&lt;ul&gt;
 &lt;li&gt;A definition and blueprint&lt;ul&gt;
 &lt;li&gt;document things(what operating system to use)&lt;/li&gt;
@@ -1045,7 +1045,7 @@ h6:hover .anchor-link {
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h2 id="What's-Docker-Container"&gt;What's Docker Container&lt;a class="anchor-link" href="#What's-Docker-Container"&gt;¶&lt;/a&gt;&lt;/h2&gt;
+&lt;h3 id="What's-Docker-Container"&gt;What's Docker Container&lt;a class="anchor-link" href="#What's-Docker-Container"&gt;¶&lt;/a&gt;&lt;/h3&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
