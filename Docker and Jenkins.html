@@ -1072,8 +1072,8 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>Inside a container</strong>
-    docker run -p 8080:8080 jenkins/jenkins:lts</p>
+<p><strong>Inside a container</strong></p>
+<pre><code>docker run -p 8080:8080 jenkins/jenkins:lts</code></pre>
 </div>
 </div>
 </div>
@@ -1081,7 +1081,7 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Mounted-from-a-host-directory">Mounted from a host directory<a class="anchor-link" href="#Mounted-from-a-host-directory">¶</a></h3>
+<p><strong>Mounted from a host directory</strong></p>
 <pre><code>docker run -v &lt;host-path&gt;:/var/jenkins_home -p 8080:8080 -p 50000:50000 jenkins/jenkins:lts</code></pre>
 </div>
 </div>
@@ -1090,7 +1090,7 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="mounted-from-a-data-volume-container">mounted from a data volume container<a class="anchor-link" href="#mounted-from-a-data-volume-container">¶</a></h3><h4 id="data-comtainer---&gt;-data">data comtainer --&gt; data<a class="anchor-link" href="#data-comtainer---&gt;-data">¶</a></h4>
+<p><strong>mounted from a data volume container</strong></p>
 <pre><code>docker run -v &lt;host-path&gt;:/var/jenkins_home --name=data busybox true
 
 ## first master jenkins
@@ -1113,7 +1113,7 @@ docker run --volumes-from=data -p 8081:8080 -p 50001:50000 jenkins/jenkins:lts
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Install-Plugins-(from-/tmp/plugins)">Install Plugins (from /tmp/plugins)<a class="anchor-link" href="#Install-Plugins-(from-/tmp/plugins)">¶</a></h4>
+<p><strong>Install Plugins (from /tmp/plugins)</strong></p>
 <pre><code>## run ubuntu and get into ubuntu 
 docker run -t -i --rm --volumes-form=frog-data -v /tmp:/tmp ubuntu bash
 root@:/# cd /var/jenkins_home/plugins
@@ -1121,12 +1121,14 @@ root@:/# cp /tmp/plugins/* .
 root@:/# exit
 
 </code></pre>
-<h4 id="Three-levels-of-backup">Three levels of backup<a class="anchor-link" href="#Three-levels-of-backup">¶</a></h4><ul>
+<p><strong>Three levels of backup</strong></p>
+<ul>
 <li>Vmware: dump of entire docker server</li>
 <li>Dokcer: copy all Data Volume</li>
 <li>Jenkins: SCM Sync plugin</li>
 </ul>
-<h4 id="Security">Security<a class="anchor-link" href="#Security">¶</a></h4><ul>
+<p><strong>Security</strong></p>
+<ul>
 <li>Role Strategy plugin</li>
 </ul>
 </div>

@@ -1007,8 +1007,8 @@ h6:hover .anchor-link {
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;&lt;strong&gt;Inside a container&lt;/strong&gt;
-    docker run -p 8080:8080 jenkins/jenkins:lts&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Inside a container&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;docker run -p 8080:8080 jenkins/jenkins:lts&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -1016,7 +1016,7 @@ h6:hover .anchor-link {
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h3 id="Mounted-from-a-host-directory"&gt;Mounted from a host directory&lt;a class="anchor-link" href="#Mounted-from-a-host-directory"&gt;¶&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Mounted from a host directory&lt;/strong&gt;&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;docker run -v &amp;lt;host-path&amp;gt;:/var/jenkins_home -p 8080:8080 -p 50000:50000 jenkins/jenkins:lts&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -1025,7 +1025,7 @@ h6:hover .anchor-link {
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h3 id="mounted-from-a-data-volume-container"&gt;mounted from a data volume container&lt;a class="anchor-link" href="#mounted-from-a-data-volume-container"&gt;¶&lt;/a&gt;&lt;/h3&gt;&lt;h4 id="data-comtainer---&amp;gt;-data"&gt;data comtainer --&amp;gt; data&lt;a class="anchor-link" href="#data-comtainer---&amp;gt;-data"&gt;¶&lt;/a&gt;&lt;/h4&gt;
+&lt;p&gt;&lt;strong&gt;mounted from a data volume container&lt;/strong&gt;&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;docker run -v &amp;lt;host-path&amp;gt;:/var/jenkins_home --name=data busybox true
 
 ## first master jenkins
@@ -1048,7 +1048,7 @@ docker run --volumes-from=data -p 8081:8080 -p 50001:50000 jenkins/jenkins:lts
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h4 id="Install-Plugins-(from-/tmp/plugins)"&gt;Install Plugins (from /tmp/plugins)&lt;a class="anchor-link" href="#Install-Plugins-(from-/tmp/plugins)"&gt;¶&lt;/a&gt;&lt;/h4&gt;
+&lt;p&gt;&lt;strong&gt;Install Plugins (from /tmp/plugins)&lt;/strong&gt;&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;## run ubuntu and get into ubuntu 
 docker run -t -i --rm --volumes-form=frog-data -v /tmp:/tmp ubuntu bash
 root@:/# cd /var/jenkins_home/plugins
@@ -1056,12 +1056,14 @@ root@:/# cp /tmp/plugins/* .
 root@:/# exit
 
 &lt;/code&gt;&lt;/pre&gt;
-&lt;h4 id="Three-levels-of-backup"&gt;Three levels of backup&lt;a class="anchor-link" href="#Three-levels-of-backup"&gt;¶&lt;/a&gt;&lt;/h4&gt;&lt;ul&gt;
+&lt;p&gt;&lt;strong&gt;Three levels of backup&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
 &lt;li&gt;Vmware: dump of entire docker server&lt;/li&gt;
 &lt;li&gt;Dokcer: copy all Data Volume&lt;/li&gt;
 &lt;li&gt;Jenkins: SCM Sync plugin&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h4 id="Security"&gt;Security&lt;a class="anchor-link" href="#Security"&gt;¶&lt;/a&gt;&lt;/h4&gt;&lt;ul&gt;
+&lt;p&gt;&lt;strong&gt;Security&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
 &lt;li&gt;Role Strategy plugin&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
