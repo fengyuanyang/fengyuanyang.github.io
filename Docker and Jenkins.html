@@ -1048,7 +1048,15 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Jenkins-in-Docker">Jenkins in Docker<a class="anchor-link" href="#Jenkins-in-Docker">¶</a></h3><p><strong>Let you install Docker Engine on virtual hosts,</strong></p>
+<h3 id="Run-reference">Run reference<a class="anchor-link" href="#Run-reference">¶</a></h3><ul>
+<li>--rm docker removes the anonymous volumes associated with the container when the container is removed</li>
+<li>-i Keep STDIN open even if not attached</li>
+<li>-t Allocate a pseudo-TTY</li>
+<li>--volumes-from mount all volumes from the given containers</li>
+<li>-d detached mode</li>
+<li>-v Bind mount a volume</li>
+</ul>
+<p><strong>For interactive process(like a shell), must use -i -t together in order to allocate a tty for the container process</strong></p>
 </div>
 </div>
 </div>
@@ -1056,8 +1064,7 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<hr/>
-<p> Three ways for /var/jenkins_home</p>
+<h3 id="Jenkins-in-Docker">Jenkins in Docker<a class="anchor-link" href="#Jenkins-in-Docker">¶</a></h3><h4 id="Three-ways-for-setting-/var/jenkins_home-into-docker">Three ways for setting /var/jenkins_home into docker<a class="anchor-link" href="#Three-ways-for-setting-/var/jenkins_home-into-docker">¶</a></h4>
 </div>
 </div>
 </div>
@@ -1066,7 +1073,7 @@ h6:hover .anchor-link {
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="Inside-a-container">Inside a container<a class="anchor-link" href="#Inside-a-container">¶</a></h3>
-<pre><code>docker run -p 8080:8080 jenkins</code></pre>
+<pre><code>docker run -p 8080:8080 jenkins/jenkins:lts</code></pre>
 </div>
 </div>
 </div>
@@ -1075,7 +1082,7 @@ h6:hover .anchor-link {
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="Mounted-from-a-host-directory">Mounted from a host directory<a class="anchor-link" href="#Mounted-from-a-host-directory">¶</a></h3>
-<pre><code>docker run -v &lt;host-path&gt;:/var/jenkins_home -p 8080:8080 jenkins</code></pre>
+<pre><code>docker run -v &lt;host-path&gt;:/var/jenkins_home -p 8080:8080 -p 50000:50000 jenkins/jenkins:lts</code></pre>
 </div>
 </div>
 </div>
@@ -1083,13 +1090,60 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="mounted-from-a-data-volume-container">mounted from a data volume container<a class="anchor-link" href="#mounted-from-a-data-volume-container">¶</a></h3>
+<h3 id="mounted-from-a-data-volume-container">mounted from a data volume container<a class="anchor-link" href="#mounted-from-a-data-volume-container">¶</a></h3><h4 id="data-comtainer---&gt;-data">data comtainer --&gt; data<a class="anchor-link" href="#data-comtainer---&gt;-data">¶</a></h4>
 <pre><code>docker run -v &lt;host-path&gt;:/var/jenkins_home --name=data busybox true
+
 ## first master jenkins
-docker run --volumes-from=data -p 8080:8080 jenkins
+docker run --volumes-from=data -p 8080:8080 -p 50000:50000 jenkins/jenkins:lts
 ## second master jenkins
-docker run --volumes-from=data -p 8081:8080 jenkins
+docker run --volumes-from=data -p 8081:8080 -p 50001:50000 jenkins/jenkins:lts
 .... so on</code></pre>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Admin-usage">Admin usage<a class="anchor-link" href="#Admin-usage">¶</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Install-Plugins-(from-/tmp/plugins)">Install Plugins (from /tmp/plugins)<a class="anchor-link" href="#Install-Plugins-(from-/tmp/plugins)">¶</a></h4>
+<pre><code>## run ubuntu and get into ubuntu 
+docker run -t -i --rm --volumes-form=frog-data -v /tmp:/tmp ubuntu bash
+root@:/# cd /var/jenkins_home/plugins
+root@:/# cp /tmp/plugins/* .
+root@:/# exit
+
+</code></pre>
+<h4 id="Three-levels-of-backup">Three levels of backup<a class="anchor-link" href="#Three-levels-of-backup">¶</a></h4><ul>
+<li>Vmware: dump of entire docker server</li>
+<li>Dokcer: copy all Data Volume</li>
+<li>Jenkins: SCM Sync plugin</li>
+</ul>
+<h4 id="Security">Security<a class="anchor-link" href="#Security">¶</a></h4><ul>
+<li>Role Strategy plugin</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="SLAVES">SLAVES<a class="anchor-link" href="#SLAVES">¶</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 </div>
 </div>
 </div>
