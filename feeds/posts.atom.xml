@@ -1007,8 +1007,8 @@ h6:hover .anchor-link {
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h3 id="Inside-a-container"&gt;Inside a container&lt;a class="anchor-link" href="#Inside-a-container"&gt;¶&lt;/a&gt;&lt;/h3&gt;
-&lt;pre&gt;&lt;code&gt;docker run -p 8080:8080 jenkins/jenkins:lts&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;Inside a container&lt;/strong&gt;
+    docker run -p 8080:8080 jenkins/jenkins:lts&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
