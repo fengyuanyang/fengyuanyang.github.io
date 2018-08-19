@@ -1015,8 +1015,8 @@ h6:hover .anchor-link {
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h2 id="Demo"&gt;Demo&lt;a class="anchor-link" href="#Demo"&gt;¶&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Build a custom Node.js Docker
-And then convert that image into a running container&lt;/p&gt;
+&lt;h2 id="Demo"&gt;Demo&lt;a class="anchor-link" href="#Demo"&gt;¶&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Build a custom Django Docker File
+and then convert that image into a running container&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -1057,19 +1057,26 @@ EXPOSE 8000&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;djangofile
-docker-compose run web python3 manage.py createsuperuser&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt; Initial django project &lt;/strong&gt;&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;django-admin startproject example .
-
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;strong&gt; Create user &lt;/strong&gt;&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;python manage.py migrate
 python manage.py createsuperuser
-
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;strong&gt; Run Server &lt;/strong&gt;&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;python3 manage.py runserver 0.0.0.0:8000&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In [ ]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt; 
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
