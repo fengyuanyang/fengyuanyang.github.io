@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 
-        <title>Docker And Jenkins</title>
+        <title>DockerFile</title>
         <meta charset="utf-8" />
         <link href="/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="OwenYang's Blog Full Atom Feed" />
         <link href="/feeds/posts.atom.xml" type="application/atom+xml" rel="alternate" title="OwenYang's Blog Categories Atom Feed" />
@@ -51,13 +51,13 @@
 
             <header>
               <h2 class="entry-title">
-                <a href="/Docker and Jenkins.html" rel="bookmark"
-                   title="Permalink to Docker And Jenkins">Docker And Jenkins</a></h2>
+                <a href="/dockerfile.html" rel="bookmark"
+                   title="Permalink to DockerFile">DockerFile</a></h2>
            
             </header>
             <footer class="post-info">
-              <abbr class="published" title="2018-07-22T20:00:00+08:00">
-                日 22 7月 2018
+              <abbr class="published" title="2018-08-19T23:00:00+08:00">
+                日 19 8月 2018
               </abbr>
               <address class="vcard author">By 
                 <a class="url fn" href="/author/owenyang.html"> OwenYang</a>
@@ -1040,7 +1040,7 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Jenkins-and-Docker"><a href="https://jenkins.io/solutions/docker/">Jenkins and Docker</a><a class="anchor-link" href="#Jenkins-and-Docker">¶</a></h2>
+<h2 id="Dockerfile">Dockerfile<a class="anchor-link" href="#Dockerfile">¶</a></h2><p><strong>Nothing more than a text file with instructions in it</strong></p>
 </div>
 </div>
 </div>
@@ -1048,15 +1048,14 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Run-reference">Run reference<a class="anchor-link" href="#Run-reference">¶</a></h3><ul>
-<li>--rm docker removes the anonymous volumes associated with the container when the container is removed</li>
-<li>-i Keep STDIN open even if not attached</li>
-<li>-t Allocate a pseudo-TTY</li>
-<li>--volumes-from mount all volumes from the given containers</li>
-<li>-d detached mode</li>
-<li>-v Bind mount a volume</li>
+<ul>
+<li>Text file used to build docker images(any filename is fine)</li>
+<li>Contains build instrucitons</li>
+<li><p>Instructions create intermediate image that can cached to speed up future builds</p>
+<p>Docker File -&gt; $docker build -&gt; Docker Image</p>
+</li>
 </ul>
-<p><strong>For interactive process(like a shell), must use -i -t together in order to allocate a tty for the container process</strong></p>
+<p><strong>Docker Image can be used to create a docker container</strong></p>
 </div>
 </div>
 </div>
@@ -1064,7 +1063,16 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Jenkins-in-Docker">Jenkins in Docker<a class="anchor-link" href="#Jenkins-in-Docker">¶</a></h3><h4 id="Three-ways-for-setting-/var/jenkins_home-into-docker">Three ways for setting /var/jenkins_home into docker<a class="anchor-link" href="#Three-ways-for-setting-/var/jenkins_home-into-docker">¶</a></h4>
+<h3 id="Command">Command<a class="anchor-link" href="#Command">¶</a></h3><ul>
+<li>FROM - Set the Base Image</li>
+<li>MAINTAINER - Set the Author field of the generated images</li>
+<li>RUN - Add commands you want to run in the container</li>
+<li>COPY - copy files or directories from <src> and adds them to the filesystem of container at the path <dest></dest></src></li>
+<li>ENTRYPOINT - configure a container that will run as an executable</li>
+<li>WORKDIR - set the working directory for RUN,CMD, ENTRYPOINT, COPY and ADD</li>
+<li>EXPOSE - inform Docker that the container listens on the specified network ports at runtime</li>
+<li>VOLUME - creates a mount point with the specified name and marks it as holding externally mounted volumes from native host or other containers</li>
+</ul>
 </div>
 </div>
 </div>
@@ -1072,8 +1080,8 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>Inside a container</strong></p>
-<pre><code>docker run -p 8080:8080 jenkins/jenkins:lts</code></pre>
+<h2 id="Demo">Demo<a class="anchor-link" href="#Demo">¶</a></h2><p>Build a custom Node.js Docker
+And then convert that image into a running container</p>
 </div>
 </div>
 </div>
@@ -1081,8 +1089,14 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>Mounted from a host directory</strong></p>
-<pre><code>docker run -v &lt;host-path&gt;:/var/jenkins_home -p 8080:8080 -p 50000:50000 jenkins/jenkins:lts</code></pre>
+<pre><code>FROM python:3.7
+ENV PYTHONUNBUFFERED 1
+RUN mkdir /code
+WORKDIR /code
+COPY requirements.txt /code/
+RUN pip install -r requirements.txt
+COPY . /code/
+EXPOSE 8000</code></pre>
 </div>
 </div>
 </div>
@@ -1090,15 +1104,8 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>Mounted from a data volume container</strong></p>
-<p><strong><a href="https://busybox.net/about.html">What is busybox</a></strong></p>
-<pre><code>docker run -v &lt;host-path&gt;:/var/jenkins_home --name=data busybox true
-
-## first master jenkins
-docker run --volumes-from=data -p 8080:8080 -p 50000:50000 jenkins/jenkins:lts
-## second master jenkins
-docker run --volumes-from=data -p 8081:8080 -p 50001:50000 jenkins/jenkins:lts
-.... so on</code></pre>
+<h3 id="Building-A-Custom-Image-from-Docker-File">Building A Custom Image from Docker File<a class="anchor-link" href="#Building-A-Custom-Image-from-Docker-File">¶</a></h3><p><strong>Usage</strong></p>
+<pre><code>docker build -t &lt;name&gt; . </code></pre>
 </div>
 </div>
 </div>
@@ -1106,7 +1113,8 @@ docker run --volumes-from=data -p 8081:8080 -p 50001:50000 jenkins/jenkins:lts
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Admin-usage">Admin usage<a class="anchor-link" href="#Admin-usage">¶</a></h3>
+<p><strong> Run django image </strong></p>
+<pre><code>docker run -v $(pwd):/code -p 8000:8000 -it &lt;name&gt; bash</code></pre>
 </div>
 </div>
 </div>
@@ -1114,78 +1122,19 @@ docker run --volumes-from=data -p 8081:8080 -p 50001:50000 jenkins/jenkins:lts
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>Install Plugins (from /tmp/plugins)</strong></p>
-<pre><code>## run ubuntu and get into ubuntu 
-docker run -t -i --rm --volumes-form=frog-data -v /tmp:/tmp ubuntu bash
-root@:/# cd /var/jenkins_home/plugins
-root@:/# cp /tmp/plugins/* .
-root@:/# exit
+<p>djangofile
+docker-compose run web python3 manage.py createsuperuser</p>
+<p><strong> Initial django project </strong></p>
+<pre><code>django-admin startproject example .
 
 </code></pre>
-<p><strong>Three levels of backup</strong></p>
-<ul>
-<li>Vmware: dump of entire docker server</li>
-<li>Dokcer: copy all Data Volume</li>
-<li>Jenkins: <a href="https://wiki.jenkins.io/display/JENKINS/SCM+Sync+configuration+plugin">SCM Sync plugin</a></li>
-</ul>
-<p><strong>Security</strong></p>
-<ul>
-<li><a href="https://wiki.jenkins.io/display/JENKINS/Role+Strategy+Plugin">Role Strategy plugin</a></li>
-</ul>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="SLAVES">SLAVES<a class="anchor-link" href="#SLAVES">¶</a></h3>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<pre><code>docker run jenkins/jnlp-slave -url http://jenkins-server:port -workDir=/home/jenkins/agent &lt;secret&gt; &lt;agent name&gt;</code></pre>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p><img alt="Alt Text" src="DockerAndJenkins-1.png"/>
-<img alt="Alt Text" src="DockerAndJenkins-2.png"/></p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<pre><code>docker run jenkins/jnlp-slave -url http://127.0.0.1:8080 -workDir=/home/jenkins/agent 18f8339a001c5fd239a3e9fadc20dc023367605bfa81d4b6281093e2010ec66e build_machine</code></pre>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>We might not connect to Master jenkins correctly because the containers are in virtual machine.
-We could get master jenkins' ip by</p>
-<pre><code>docker inspect [container id]</code></pre>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [ ]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span> 
-</pre></div>
-</div>
+<p><strong> Create user </strong></p>
+<pre><code>python manage.py migrate
+python manage.py createsuperuser
+
+</code></pre>
+<p><strong> Run Server </strong></p>
+<pre><code>python3 manage.py runserver 0.0.0.0:8000</code></pre>
 </div>
 </div>
 </div>
@@ -1224,7 +1173,7 @@ We could get master jenkins' ip by</p>
               <h3>Comments</h3>
               <div id="disqus_thread"></div>
               <script type="text/javascript">
-                var disqus_identifier = "Docker and Jenkins.html";
+                var disqus_identifier = "dockerfile.html";
                 (function() {
                 var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
                 dsq.src = 'https://fengyuanyang.disqus.com/embed.js';
